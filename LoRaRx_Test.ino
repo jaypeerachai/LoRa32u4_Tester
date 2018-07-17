@@ -20,6 +20,11 @@ void setup()
   pinMode(LED, OUTPUT);
   pinMode(RFM95_RST, OUTPUT);
   digitalWrite(RFM95_RST, HIGH);
+
+  while (!Serial) {
+    delay(1);
+  }
+  delay(100);
   
   Serial.println("Feather LoRa RX Test!");
  
@@ -65,8 +70,9 @@ void loop()
       Serial.println((char*)buf);
  
       // Send an ACK back to transmitter
+      Serial.println("Preparing ACK...");
       String ii = String(i);
-      uint8_t ACK[] = "Thanks for package "+ii;
+      uint8_t ACK[] = "Thanks for package";
       rf95.send(ACK, sizeof(ACK));
       rf95.waitPacketSent();
       Serial.println("Sent an ACK");
