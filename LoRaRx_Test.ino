@@ -71,8 +71,10 @@ void loop()
  
       // Send an ACK back to transmitter
       Serial.println("Preparing ACK...");
+      delay(100) //+++++++++++++++++++++++++++++++++I needet this to make the return channel work too
       String ii = String(i);
       uint8_t ACK[] = "Thanks for package";
+      delay(100) //+++++++++++++++++++++++++++++++++I needet this to make the return channel work too
       rf95.send(ACK, sizeof(ACK));
       rf95.waitPacketSent();
       Serial.println("Sent an ACK");
